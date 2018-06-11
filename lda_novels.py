@@ -18,11 +18,12 @@ def main():
     for novela in novelas:
         print('procesando {}'.format(novela))
         novela_path = pathlib.Path(NOVELS_DIR, novela)
-        
+
         try:
             titulo = novela_path.stem
             with open(novela_path) as f:
                 libro = f.read()
+                libro = libro.lower()
                 libro = libro.strip().split()
                 libro = ' '.join(libro)
                 tokens = (w for w in tokenize(libro) if w not in sw)
@@ -30,7 +31,7 @@ def main():
                          if tok.isalpha())
                 tokenizada = ' '.join(lemma for lemma in lemas).strip()
 #                tokenizada = ' '.join(x for x in novel_words(f, lemmer, sw))
-            
+
             corpus.write('{} {}\n'.format(titulo, tokenizada))
         except UnicodeDecodeError:
             improcesables.append(novela)
