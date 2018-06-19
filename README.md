@@ -38,3 +38,5 @@ real    31m22.422s
 user    31m20.083s
 sys     0m0.296s
 
+## Estructura diccionario de emociones
+'PALABRA', 'FEAR', 'SADNESS', 'ANGER', 'SURPRISE', 'DISGUST', 'JOY'
