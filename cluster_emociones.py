@@ -1,20 +1,23 @@
 import pathlib
 #import numpy as np
 
-RESULTS_DIR = 'Results'
+RESULTS_DIR = 'Results/dual'
 PI_FILE = 'final.pi'
 TOPICS = ['1', '10', '20', '30', '40', '50']
+NSENT = 2
+OUT_DIR = pathlib.Path(RESULTS_DIR, 'Clusterado')
 
 DATA_FILES = [pathlib.Path(RESULTS_DIR, topic, PI_FILE) for topic in TOPICS]
 
 def main():
     for numero, archivo in enumerate(DATA_FILES):
+        out_file = pathlib.Path(OUT_DIR, '{}.txt'.format(numero))
         print(archivo)
         with open(archivo) as f:
             clusters = clusteriza(f)
         
-        with open('Clusterado/{}.txt'.format(numero), 'w', encoding='utf8') as f:
-            for i in range(6):
+        with open(out_file, 'w', encoding='utf8') as f:
+            for i in range(NSENT):
                 print("En el cluster {} quedaron agrupados ".format(i)\
                     + "los siguientes títulos: ", file=f)
                 for titulo in clusters[i]:

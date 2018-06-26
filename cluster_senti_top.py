@@ -3,10 +3,11 @@ import json
 from collections import defaultdict
 import numpy as np
 
-RESULTS_DIR = 'Results'
+RESULTS_DIR = 'Results/dual'
 UTILES_DIR = [str((i + 1) * 10) for i in range(5)]
 THETA_FILE = 'final.theta'
 FILE_DICT_FILE = 'listado.lista'
+N_SENTI = 2
 
 for num_dir in UTILES_DIR:
     work_dir = pathlib.Path(RESULTS_DIR, num_dir)
@@ -17,10 +18,11 @@ for num_dir in UTILES_DIR:
     
     datos = defaultdict(list)
     is_titulo = False
+    block_size = N_SENTI + 1
     with  open(theta) as f:
         for i, linea in  enumerate(f):
             linea = linea.strip()
-            is_titulo = (i % 7) == 0
+            is_titulo = (i % block_size) == 0
             if is_titulo:
                 titulo = int(linea.split()[-1])
                 titulo = archivos[titulo]
